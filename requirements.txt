@@ -1,0 +1,24 @@
+# Install PyTorch and torchvision first; see README.md.
+# Dependency maintenance: zhtang2004@gmail.com
+numpy>=1.26,<2
+scipy
+Pillow
+plyfile
+opencv-python<4.12
+tqdm
+trimesh
+open3d
+lpips
+mediapy
+matplotlib
+tensorboard
+gstaichi
+libigl
+pybind11
+ninja
+setuptools
+wheel
+joblib
+scikit-learn
+scikit-image
+PyYAML>=6.0,<7

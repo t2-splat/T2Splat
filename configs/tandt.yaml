@@ -1,0 +1,46 @@
+# Validated tandt train/truck preset: 4M points, 8x8 textures, no external priors.
+# Reference: runs/tandt_surface_20260927 (not the normal/depth prior experiment).
+data:
+  root: ../datasets/tandt
+  output: output/tandt
+  layout: '{scene}'
+
+pipeline:
+  texture: true
+  image_metrics: true
+  export_mesh: true
+  geometry_eval: none
+
+training:
+  iterations: 30000
+  rdt_backend: surface
+  visibility_pruning: progressive_collapse
+  heartbeat_safety: true
+  topology_monitor_interval: 1000
+  visibility_prune_start_iter: 21000
+  visibility_prune_end_iter: 27000
+  visibility_prune_interval: 1000
+  visibility_prune_threshold_start: 0.05
+  visibility_prune_threshold_end: 0.5
+  visibility_prune_max_face_ratio: 0.02
+  start_vertex_normal: 20000
+
+texture:
+  face_tex_res: 8
+  stage2_iterations: 5000
+  use_mip_texture: true
+
+scene_defaults:
+  kind: outdoor
+  images: images
+  max_points: 4000000
+  # Applied after outdoor/strong defaults so this preset keeps prior supervision off.
+  # The existing self-supervised lambda_normals regularizer remains unchanged.
+  training:
+    lambda_normals_super: 0.0
+    depth_lambda_init: 0.0
+    depth_lambda_final: 0.0
+
+scenes:
+  train: {}
+  truck: {}

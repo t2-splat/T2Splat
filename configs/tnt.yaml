@@ -1,0 +1,76 @@
+# TNT geometry benchmark: six scenes, Heartbeat collapse ratio 0.04.
+# Validated reference: runs/tnt_heartbeat004_remaining_20261017.
+# Separate from tandt.yaml (train/truck, 4M points, 8x8 texture/rendering).
+data:
+  root: ../datasets/TNT
+  gt_root: ../datasets/TNT/evaluation
+  output: output/tnt
+  layout: '{scene}/{scene}'
+
+pipeline:
+  texture: false
+  image_metrics: false
+  export_mesh: true
+  mesh_clean: false
+  mesh_manifold: false
+  geometry_eval: virtual_scan
+  eval_samples: 10000000
+  eval_resolution: 2
+
+training:
+  iterations: 30000
+  resolution: -1
+  rdt_backend: surface
+  visibility_pruning: progressive_collapse
+  enable_heartbeat: true
+  heartbeat_safety: true
+  heartbeat_start_iter: 12000
+  heartbeat_end_iter: 20000
+  heartbeat_interval: 1000
+  heartbeat_collapse_ratio: 0.04
+  heartbeat_split_top_k: 5.0
+  heartbeat_split_momentum_std: 0.001
+  heartbeat_w_spatial: 1.0
+  heartbeat_w_color: 0.5
+  heartbeat_w_opacity: 0.3
+  heartbeat_split_end: 0
+  heartbeat_collapse_start: 0
+  heartbeat_collapse_w_spatial: 5.0
+  visibility_prune_start_iter: 21000
+  visibility_prune_end_iter: 27000
+  visibility_prune_interval: 1000
+  visibility_prune_threshold_start: 0.05
+  visibility_prune_threshold_end: 0.5
+  visibility_prune_max_face_ratio: 0.02
+  final_opacity_iter: 24000
+  sigma_until: 30000
+  densify_until_iter: 10000
+  lambda_vertex_normal: 0.0
+  start_vertex_normal: 30000
+  lambda_mesh_smooth: 0.0
+  lambda_mesh_edge: 0.0
+  lambda_mesh_nc: 0.0
+  mesh_viz_interval: 0
+  topology_monitor_interval: 1000
+  final_only_monitoring: true
+  face_tex_start_iter: 0
+
+scene_defaults:
+  # Meetingroom deliberately uses the same outdoor preset as the other scenes.
+  kind: outdoor
+  images: images
+  max_points: 5200000
+  training:
+    # Skip loading existing external priors as well as zeroing their losses.
+    disable_priors: true
+    lambda_normals_super: 0.0
+    depth_lambda_init: 0.0
+    depth_lambda_final: 0.0
+
+scenes:
+  Barn: {}
+  Caterpillar: {}
+  Courthouse: {}
+  Ignatius: {}
+  Truck: {}
+  Meetingroom: {}
