@@ -140,6 +140,30 @@ python create_glb.py output/mipnerf360/garden --iteration 35000 \
 
 Use the saved iteration corresponding to your model.
 
+## Related Work
+
+Related research on triangle splatting, differentiable meshes, and surface reconstruction:
+
+- [MeshSplatting: Differentiable Rendering with Opaque Meshes](https://meshsplatting.github.io/)
+- [Triangle Splatting for Real-Time Radiance Field Rendering](https://trianglesplatting.github.io/)
+- [MILo: Mesh-In-the-Loop Gaussian Splatting for Detailed and Efficient Surface Reconstruction](https://anttwo.github.io/milo/)
+- [DMesh++: An Efficient Differentiable Mesh for Complex Shapes](https://sonsang.github.io/dmesh2-project/)
+- [DMesh: A Differentiable Mesh Representation](https://sonsang.github.io/dmesh-project/)
+
+## BibTeX
+
+If you find T2-Splat useful for your research, please cite our paper:
+
+```bibtex
+@inproceedings{tang2026t2splat,
+  title     = {{T2-Splat}: Adaptive Topology Mesh Splatting with Texture Residuals},
+  author    = {Tang, Zhihao and Zhang, Youjia and Zhao, Mingbo and Yang, Wei},
+  booktitle = {Advances in Neural Information Processing Systems},
+  year      = {2026},
+  url       = {https://t2-splat.github.io/}
+}
+```
+
 ## Contact
 
 Project maintenance: **zhtang2004@gmail.com**.
