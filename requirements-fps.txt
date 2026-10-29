@@ -1,0 +1,5 @@
+# Standalone OpenGL mesh benchmark; CUDA and training dependencies are not needed.
+numpy>=1.24
+glfw>=2.6
+PyOpenGL>=3.1.7
+plyfile>=1.0

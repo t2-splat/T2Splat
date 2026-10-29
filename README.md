@@ -147,6 +147,24 @@ python create_glb.py output/mipnerf360/garden --iteration 35000 \
 
 Use the saved iteration corresponding to your model.
 
+## OpenGL rendering benchmark
+
+Measure the off-screen GPU rendering throughput of an exported, vertex-colored PLY mesh. This standalone tool runs on macOS, Windows, or Linux with an OpenGL 4.1 context and GPU timer queries; it does not require CUDA or the training environment.
+
+Install its optional dependencies and benchmark at **1920 × 1080**:
+
+```bash
+python3 -m pip install -r requirements-fps.txt
+python3 tools/mesh_fps_benchmark.py output/mipnerf360/garden/mesh.ply \
+  --resolution 1920x1080 --json output/mipnerf360/garden/fps.json
+```
+
+The default settings use 4× MSAA, backface culling, depth testing, 12 warmup frames, and 90 timed frames per resolution. VSync is disabled. Without `--resolution`, the script tests both 1920×1080 and 1280×960. Use `--no-msaa` to disable MSAA.
+
+FPS is computed from `GL_TIME_ELAPSED` GPU timings of the off-screen rendering commands, not end-to-end application or display frame times. The benchmark uses baked vertex colors and does not evaluate the full SH/MipTex appearance model. Binary little-endian triangle PLY files with RGB or RGBA vertex colors are supported, including the default T2-Splat PLY export.
+
+See [benchmark details](docs/mesh_fps_benchmark.md) for the camera path, measurement definitions, options, and JSON output.
+
 ## Related Work
 
 Related research on triangle splatting, differentiable meshes, and surface reconstruction:
