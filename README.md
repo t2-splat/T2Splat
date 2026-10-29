@@ -1,4 +1,4 @@
-<h1 align="center">T2-Splat: Adaptive Topology Mesh Splatting with Texture Residuals</h1>
+<h1 align="center">T<sup>2</sup>-Splat: Adaptive Topology Mesh Splatting with Texture Residuals</h1>
 <p align="center">
   Zhihao Tang<sup>1</sup>, Youjia Zhang<sup>1</sup>, Mingbo Zhao<sup>2</sup>, Wei Yang<sup>1,&dagger;</sup>
 </p>
@@ -14,7 +14,7 @@
 
  <div align="center">
   <a href="asset/figure.pdf">
-    <img src="asset/figure.png" width="100%" alt="T2Splat rendering and mesh reconstruction comparisons">
+    <img src="asset/figure.png" width="100%" alt="T²-Splat rendering and mesh reconstruction comparisons">
   </a>
 </div> 
 
@@ -161,7 +161,7 @@ python3 tools/mesh_fps_benchmark.py output/mipnerf360/garden/mesh.ply \
 
 The default settings use 4× MSAA, backface culling, depth testing, 12 warmup frames, and 90 timed frames per resolution. VSync is disabled. Without `--resolution`, the script tests both 1920×1080 and 1280×960. Use `--no-msaa` to disable MSAA.
 
-FPS is computed from `GL_TIME_ELAPSED` GPU timings of the off-screen rendering commands, not end-to-end application or display frame times. The benchmark uses baked vertex colors and does not evaluate the full SH/MipTex appearance model. Binary little-endian triangle PLY files with RGB or RGBA vertex colors are supported, including the default T2-Splat PLY export.
+FPS is computed from `GL_TIME_ELAPSED` GPU timings of the off-screen rendering commands, not end-to-end application or display frame times. The benchmark uses baked vertex colors and does not evaluate the full SH/MipTex appearance model. Binary little-endian triangle PLY files with RGB or RGBA vertex colors are supported, including the default T<sup>2</sup>-Splat PLY export.
 
 See [benchmark details](docs/mesh_fps_benchmark.md) for the camera path, measurement definitions, options, and JSON output.
 
@@ -179,11 +179,11 @@ Related research on triangle splatting, differentiable meshes, and surface recon
 
 ## BibTeX
 
-If you find T2-Splat useful for your research, please cite our paper:
+If you find T<sup>2</sup>-Splat useful for your research, please cite our paper:
 
 ```bibtex
 @inproceedings{tang2026t2splat,
-  title     = {{T2-Splat}: Adaptive Topology Mesh Splatting with Texture Residuals},
+  title     = {{T$^2$-Splat}: Adaptive Topology Mesh Splatting with Texture Residuals},
   author    = {Tang, Zhihao and Zhang, Youjia and Zhao, Mingbo and Yang, Wei},
   booktitle = {Advances in Neural Information Processing Systems},
   year      = {2026},
