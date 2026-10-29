@@ -87,7 +87,7 @@ def compare_and_save(vertices, before_faces, output_dir,
         "legacy_rdt_calls": 0,
     }
     stage_names = ("before", "legacy")
-    headings = ("指标", "RDT 前", "旧版 RDT 后")
+    headings = ("Metric", "Before RDT", "After legacy RDT")
     if include_surface:
         summary["protocol"]["surface_input"] = "exact legacy_faces.npy candidates"
         summary["protocol"]["surface_parameters"] = {
@@ -96,25 +96,25 @@ def compare_and_save(vertices, before_faces, output_dir,
             "min_quality": float(min_quality),
         }
         stage_names += ("surface",)
-        headings += ("新版 RDT 后",)
+        headings += ("After Safe RDT",)
     rows = (
-        ("三角形数", "faces"),
-        ("面片组数量", "face_components"),
-        ("最大连通块面数", "largest_component_faces"),
-        ("非流形边 / 顶点", None),
-        ("三角形质量中位数", "triangle_quality_median"),
+        ("Triangle count", "faces"),
+        ("Face component count", "face_components"),
+        ("Faces in the largest component", "largest_component_faces"),
+        ("Non-manifold edges / vertices", None),
+        ("Median triangle quality", "triangle_quality_median"),
     )
 
     def value_for(stage, field, pretty=False):
         metrics = summary["stages"].get(stage, {}).get("metrics")
         if metrics is None:
-            return "待计算" if pretty else ""
+            return "Pending" if pretty else ""
         if field is None:
             edge, vertex = metrics["nonmanifold_edges"], metrics["nonmanifold_vertices"]
             return f"{edge:,} / {vertex:,}" if pretty else f"{edge} / {vertex}"
         value = native(metrics[field])
         if value is None:
-            return "未定义" if pretty else ""
+            return "Undefined" if pretty else ""
         if pretty and isinstance(value, int):
             return f"{value:,}"
         # Preserve the measured float's full representation, without rounding.
@@ -129,42 +129,46 @@ def compare_and_save(vertices, before_faces, output_dir,
             for label, field in rows:
                 writer.writerow([label] + [value_for(stage, field) for stage in stage_names])
         lines = [
-            "# 同一训练状态下的 RDT 对比" if include_surface else "# 旧版 RDT 前后对比", "",
-            f"状态：{summary['status']}。开始时间（UTC）：{summary['started_utc']}。", "",
+            "# RDT comparison from the same training state" if include_surface
+            else "# Before and after legacy RDT", "",
+            f"Status: {summary['status']}. Started (UTC): {summary['started_utc']}.", "",
             "| " + " | ".join(headings) + " |",
             "| --- |" + " ---: |" * len(stage_names),
         ]
         for label, field in rows:
             lines.append("| " + " | ".join(
                 [label] + [value_for(stage, field, pretty=True) for stage in stage_names]) + " |")
-        protocol_text = "流程：旧版 RDT 只运行一次。"
+        protocol_text = "Protocol: Legacy RDT runs exactly once. "
         if include_surface:
-            protocol_text += "新版在其返回的同一候选面集合上调用 `select_rdt_surface`。"
-        protocol_text += ("各阶段共用原始顶点坐标，输入和旧版结果均未经清理、"
-                          "顶点合并或连通块筛除。旧版使用 `orient=False`。")
+            protocol_text += "Safe RDT calls `select_rdt_surface` on the same returned candidate faces. "
+        protocol_text += ("All stages share the original vertex coordinates. Neither the input nor "
+                          "the legacy result undergoes cleaning, vertex merging, or component pruning. "
+                          "Legacy RDT uses `orient=False`.")
         lines.extend([
             "", protocol_text, "",
-            "面片组以共享边定义连通性。三角形质量为 "
-            "`q = 4√3 A / (a² + b² + c²)`，其中 A 是面积，a、b、c 是边长；"
-            "正三角形为 1，退化三角形为 0。表中数值保留实测精度。", "",
-            "边界允许存在；非流形边/顶点使用项目现有 `mesh_topology_metrics` 的统计。"
-            "该统计不检查全局自相交。完整指标、输入类型、代码路径、运行环境与耗时见 "
-            "[summary.json](summary.json)。", "",
+            "Face components are connected through shared edges. Triangle quality is "
+            "`q = 4 * sqrt(3) * A / (a^2 + b^2 + c^2)`, where A is the area and a, b, c "
+            "are edge lengths: 1 for equilateral triangles and 0 for degenerate triangles. "
+            "Table values retain the measured precision.", "",
+            "Boundaries are allowed. Non-manifold edge and vertex counts use the project's existing "
+            "`mesh_topology_metrics`. These metrics do not test global self-intersections. "
+            "See [summary.json](summary.json) for the full metrics, input data types, source paths, "
+            "runtime environment, and timings.", "",
         ])
         if include_surface:
             lines.extend([
-                f"新版筛选参数：`max_distance_ratio={max_distance_ratio}`，"
-                f"`min_normal_cos={min_normal_cos}`，`min_quality={min_quality}`。", "",
+                f"Safe RDT selection parameters: `max_distance_ratio={max_distance_ratio}`, "
+                f"`min_normal_cos={min_normal_cos}`, `min_quality={min_quality}`.", "",
             ])
         lines.extend([
-            "原始数组：" + "，".join(
-                f"[{path}]({path})" for path in summary["arrays"].values()) + "。", "",
-            "## 耗时（秒）", "", "| 阶段 | 秒 |", "| --- | ---: |",
+            "Raw arrays: " + ", ".join(
+                f"[{path}]({path})" for path in summary["arrays"].values()) + ".", "",
+            "## Timings (seconds)", "", "| Stage | Seconds |", "| --- | ---: |",
         ])
         for name, elapsed in summary["timings_seconds"].items():
             lines.append(f"| {name} | {elapsed} |")
         if "error" in summary:
-            lines.extend(["", "失败信息：`" + summary["error"].replace("`", "'") + "`。"])
+            lines.extend(["", "Error: `" + summary["error"].replace("`", "'") + "`."])
         (destination / "README.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
     def measure(stage, faces):
