@@ -166,6 +166,22 @@ If you find T2-Splat useful for your research, please cite our paper:
 }
 ```
 
-## Contact
+BibTeX entries for the arXiv versions of [Triangle Splatting](https://arxiv.org/abs/2505.19175) and [MeshSplatting](https://arxiv.org/abs/2512.06818):
 
-Project maintenance: **zhtang2004@gmail.com**.
+```bibtex
+@article{Held2025Triangle,
+  title   = {Triangle Splatting for Real-Time Radiance Field Rendering},
+  author  = {Held, Jan and Vandeghen, Renaud and Deliege, Adrien and Hamdi, Abdullah and Giancola, Silvio and Cioppa, Anthony and Vedaldi, Andrea and Ghanem, Bernard and Tagliasacchi, Andrea and Van Droogenbroeck, Marc},
+  journal = {arXiv preprint arXiv:2505.19175},
+  year    = {2025},
+  url     = {https://arxiv.org/abs/2505.19175}
+}
+
+@article{Held2025MeshSplatting,
+  title   = {{MeshSplatting}: Differentiable Rendering with Opaque Meshes},
+  author  = {Held, Jan and Son, Sanghyun and Vandeghen, Renaud and Rebain, Daniel and Gadelha, Matheus and Zhou, Yi and Cioppa, Anthony and Lin, Ming C. and Van Droogenbroeck, Marc and Tagliasacchi, Andrea},
+  journal = {arXiv preprint arXiv:2512.06818},
+  year    = {2025},
+  url     = {https://arxiv.org/abs/2512.06818}
+}
+```
