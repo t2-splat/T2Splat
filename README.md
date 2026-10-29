@@ -166,7 +166,7 @@ If you find T2-Splat useful for your research, please cite our paper:
 }
 ```
 
-BibTeX entries for the arXiv versions of [Triangle Splatting](https://arxiv.org/abs/2505.19175) and [MeshSplatting](https://arxiv.org/abs/2512.06818):
+The following works helped make our work possible:
 
 ```bibtex
 @article{Held2025Triangle,
