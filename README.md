@@ -1,6 +1,13 @@
 <h1 align="center">T2-Splat: Adaptive Topology Mesh Splatting with Texture Residuals</h1>
 <p align="center">
-  Zhihao Tang, Youjia Zhang, Mingbo Zhao, Wei Yang
+  Zhihao Tang<sup>1</sup>, Youjia Zhang<sup>1</sup>, Mingbo Zhao<sup>2</sup>, Wei Yang<sup>1,&dagger;</sup>
+</p>
+<p align="center">
+  <sup>1</sup>Huazhong University of Science and Technology<br>
+  <sup>2</sup>Donghua University
+</p>
+<p align="center">
+  <sup>&dagger;</sup>Corresponding author
 </p>
 
 <br>
