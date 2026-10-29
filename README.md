@@ -146,9 +146,11 @@ Related research on triangle splatting, differentiable meshes, and surface recon
 
 - [MeshSplatting: Differentiable Rendering with Opaque Meshes](https://meshsplatting.github.io/)
 - [Triangle Splatting for Real-Time Radiance Field Rendering](https://trianglesplatting.github.io/)
+- [3D Convex Splatting: Radiance Field Rendering with 3D Smooth Convexes](https://convexsplatting.github.io/)
 - [MILo: Mesh-In-the-Loop Gaussian Splatting for Detailed and Efficient Surface Reconstruction](https://anttwo.github.io/milo/)
 - [DMesh++: An Efficient Differentiable Mesh for Complex Shapes](https://sonsang.github.io/dmesh2-project/)
 - [DMesh: A Differentiable Mesh Representation](https://sonsang.github.io/dmesh-project/)
+- [Gaussian Wrapping — From Blobs to Spokes: High-Fidelity Surface Reconstruction via Oriented Gaussians](https://diego1401.github.io/BlobsToSpokesWebsite/)
 
 ## BibTeX
 
