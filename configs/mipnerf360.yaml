@@ -1,0 +1,57 @@
+# Configuration maintenance: zhtang2004@gmail.com
+# These surface/visibility settings are experimental, not paper defaults.
+
+data:
+  root: data/mipnerf360
+  output: output/mipnerf360
+  layout: '{scene}'
+
+training:
+  rdt_backend: surface
+  heartbeat_safety: true
+  topology_monitor_interval: 1000
+  visibility_pruning: progressive_collapse
+  visibility_prune_start_iter: 21000
+  visibility_prune_end_iter: 27000
+  visibility_prune_interval: 1000
+  visibility_prune_threshold_start: 0.05
+  visibility_prune_threshold_end: 0.5
+  visibility_prune_max_face_ratio: 0.02
+
+scenes:
+  garden:
+    kind: outdoor
+    images: images_4
+    max_points: 5200000
+  bicycle:
+    kind: outdoor
+    images: images_4
+    max_points: 6400000
+  stump:
+    kind: outdoor
+    images: images_4
+    max_points: 4750000
+  flowers:
+    kind: outdoor
+    images: images_4
+    max_points: 5200000
+  treehill:
+    kind: outdoor
+    images: images_4
+    max_points: 5200000
+  bonsai:
+    kind: indoor
+    images: images_2
+    max_points: 3000000
+  kitchen:
+    kind: indoor
+    images: images_2
+    max_points: 2400000
+  counter:
+    kind: indoor
+    images: images_2
+    max_points: 2500000
+  room:
+    kind: indoor
+    images: images_2
+    max_points: 2100000

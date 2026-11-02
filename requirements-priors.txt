@@ -1,0 +1,5 @@
+# Optional Metric3D and Depth-Anything-V2 preprocessing dependencies.
+# Install the external model's matching environment and weights separately.
+mmengine
+mmcv
+timm

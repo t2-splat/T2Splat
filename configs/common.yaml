@@ -1,0 +1,84 @@
+# Configuration maintenance: zhtang2004@gmail.com
+
+pipeline:
+  texture: true
+  image_metrics: true
+  export_mesh: true
+  mesh_clean: false
+  mesh_manifold: false
+  geometry_eval: none
+  eval_samples: 10000000
+  eval_resolution: 2
+
+training:
+  iterations: 30000
+  enable_heartbeat: true
+  heartbeat_start_iter: 12000
+  heartbeat_end_iter: 20000
+  heartbeat_interval: 1000
+  heartbeat_collapse_ratio: 0.08
+  heartbeat_split_top_k: 5.0
+  heartbeat_split_momentum_std: 0.001
+  heartbeat_w_spatial: 1.0
+  heartbeat_w_color: 0.5
+  heartbeat_w_opacity: 0.3
+  heartbeat_split_end: 0
+  heartbeat_collapse_start: 0
+  heartbeat_collapse_w_spatial: 5.0
+  lambda_vertex_normal: 0.0
+  start_vertex_normal: 30000
+  lambda_mesh_smooth: 0.0
+  mesh_smooth_start_iter: 12000
+  mesh_smooth_method: cot
+  lambda_mesh_edge: 0.0
+  mesh_edge_start_iter: 12000
+  lambda_mesh_nc: 0.0
+  mesh_nc_start_iter: 12000
+  mesh_viz_interval: 0
+
+outdoor:
+  lambda_normals: 5.0e-05
+  lambda_normals_super: 0.01
+  depth_lambda_init: 0.01
+  depth_lambda_final: 0.001
+  iteration_mesh: 7000
+
+indoor:
+  indoor: true
+  lambda_normals: 4.0e-05
+  lambda_normals_super: 0.01
+  depth_lambda_init: 0.0
+  depth_lambda_final: 0.0
+  iteration_mesh: 5000
+  lambda_dssim: 0.4
+  weight_lr: 0.014
+  lr_triangles_points_init: 0.0015
+  heartbeat_collapse_ratio: 0.05
+
+strong:
+  outdoor:
+    lambda_normals: 0.0005
+    lambda_normals_super: 0.05
+    depth_lambda_init: 0.1
+    depth_lambda_final: 0.01
+  indoor:
+    lambda_normals_super: 0.05
+    depth_lambda_init: 0.05
+    depth_lambda_final: 0.005
+
+texture:
+  face_tex_res: 8
+  stage2_iterations: 5000
+  legacy_residual: true
+  use_mip_texture: true
+  lr_face_texture: 0.0005
+  lr_geometry: 0.0
+  lr_sh: 0.004
+  lambda_l1: 0.8
+  lambda_ssim: 0.2
+  lambda_tv: 0.01
+  lambda_l2: 0.01
+  lr_decay_start: 1000
+  lr_decay_ratio: 0.1
+  test_interval: 500
+  texture_adam_offload: false

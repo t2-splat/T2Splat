@@ -1,0 +1,120 @@
+data:
+  root: ../datasets/DTU
+  gt_root: ../datasets/DTU
+  output: output/dtu
+  layout: '{scene}'
+
+pipeline:
+  texture: false
+  image_metrics: false
+  export_mesh: true
+  geometry_eval: dtu
+  mesh_clean: false
+  mesh_min_faces_ratio: 0.01
+  mesh_manifold: false
+
+training:
+  iterations: 20000
+  sigma_until: 30000
+  final_opacity_iter: 25000
+  start_upsampling: 20000
+  feature_lr: 0.004
+  size_probs_zero: 0.0
+  splitt_large_triangles: 500
+  start_pruning: 3000
+  weight_lr: 0.05
+  lambda_weight: 0.0
+  prune_size: 1300
+  densify_until_iter: 10000
+  run_restricted_delaunay: 11000
+  iteration_mesh: 8000
+  lambda_normals: 1.0e-05
+  lambda_normals_super: 0.0
+  disable_priors: true
+  depth_lambda_init: 0.0
+  depth_lambda_final: 0.0
+  lambda_vertex: 0.0
+  lr_triangles_points_init: 0.00052
+  prune_triangles_threshold: 0.17
+  white_background: true
+  enable_heartbeat: true
+  heartbeat_start_iter: 12000
+  heartbeat_end_iter: 18000
+  heartbeat_interval: 1000
+  heartbeat_collapse_ratio: 0.05
+  heartbeat_split_top_k: 5.0
+  heartbeat_safety: true
+  heartbeat_max_edge_len_ratio: 2.0
+  heartbeat_use_qem: true
+  heartbeat_qem_boundary_weight: 10.0
+  rdt_backend: surface
+  rdt_surface_mode: g
+  rdt_max_distance_ratio: 0.5
+  rdt_min_normal_cos: 0.15
+  rdt_min_quality: 0.02
+  visibility_pruning: legacy
+  final_visibility_threshold: 0.6
+  final_only_monitoring: true
+  topology_monitor_interval: 0
+  save_iterations: [20000]
+  save_topology_snapshots: false
+
+texture:
+  face_tex_res: 4
+  stage2_iterations: 2000
+  lr_face_texture: 0.005
+  lr_decay_start: 500
+  use_mip_texture: false
+
+scene_defaults:
+  kind: dtu
+  images: images
+  max_points: 650000
+
+scenes:
+  scan24:
+    training:
+      final_opacity_iter: 30000
+  scan37:
+    training:
+      final_opacity_iter: 24000
+  scan40:
+    training:
+      final_opacity_iter: 30000
+  scan55:
+    training:
+      final_opacity_iter: 30000
+  scan63:
+    training:
+      lambda_normals: 1.0e-06
+      final_visibility_threshold: 0.65
+    pipeline:
+      mesh_clean: true
+  scan65:
+    training:
+      prune_triangles_threshold: 0.14
+    pipeline:
+      mesh_clean: true
+  scan69:
+    training:
+      final_visibility_threshold: 0.65
+    pipeline:
+      mesh_clean: true
+  scan83: {}
+  scan97:
+    training:
+      final_visibility_threshold: 0.5
+  scan105:
+    pipeline:
+      mesh_clean: true
+  scan106:
+    training:
+      final_opacity_iter: 30000
+  scan110: {}
+  scan114: {}
+  scan118:
+    training:
+      final_opacity_iter: 30000
+  scan122:
+    training:
+      final_opacity_iter: 30000
